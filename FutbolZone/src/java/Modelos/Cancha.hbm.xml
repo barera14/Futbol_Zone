@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Cancha" table="cancha" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idCancha" type="java.lang.Integer">
+            <column name="idCancha" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="establecimiento" class="Modelos.Establecimiento" fetch="select">
+            <column name="Establecimiento" not-null="true" />
+        </many-to-one>
+        <property name="tipoCancha" type="string">
+            <column name="Tipo_Cancha" length="45" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="8" not-null="true" />
+        </property>
+        <property name="foto" type="string">
+            <column name="Foto" length="65535" not-null="true" />
+        </property>
+        <property name="valor" type="int">
+            <column name="Valor" not-null="true" />
+        </property>
+        <set name="alquilers" table="alquiler" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Cancha_idCancha" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Alquiler" />
+        </set>
+    </class>
+</hibernate-mapping>

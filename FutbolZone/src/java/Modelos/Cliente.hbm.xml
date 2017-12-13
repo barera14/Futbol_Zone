@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Cliente" table="cliente" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="Modelos.Usuarios" fetch="select">
+            <column name="Usuario" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="Apellido" length="45" not-null="true" />
+        </property>
+        <property name="documento" type="string">
+            <column name="Documento" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="celular" type="long">
+            <column name="Celular" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="8" not-null="true" />
+        </property>
+        <set name="alquilers" table="alquiler" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Cliente_idCliente" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Alquiler" />
+        </set>
+        <set name="equipos" table="equipo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Cliente" />
+            </key>
+            <one-to-many class="Modelos.Equipo" />
+        </set>
+    </class>
+</hibernate-mapping>

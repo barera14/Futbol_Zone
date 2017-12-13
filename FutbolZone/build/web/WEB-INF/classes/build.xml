@@ -1,0 +1,63 @@
+<project name="OracleLobDBStore" default="usage" basedir=".">
+
+  <target name="setup">    
+    <property name="servletshome" value="lib" />
+    <property name="oraclehome" value="lib" />
+    <property name="uploadbeanhome" value="lib" />    
+  </target>  
+
+  <target name="init" depends="setup">    
+    <property name="servletsjar" value="${servletshome}/servlet.jar" />
+    <property name="oraclejar" value="${oraclehome}/classes12.jar" />  
+    <property name="uploadbeanjar" value="${uploadbeanhome}/uploadbean.jar" />     
+    <property name="sources" value="src" />
+    <property name="classes" value="classes" />
+    <property name="dist" value="dist" />    
+    <property name="api" value="api" />    
+  </target>
+
+  <target name="build" depends="init">
+    <echo message="------ Building OracleLobDBStore"/>
+    <javac srcdir="${sources}" destdir="${classes}" includes="**">
+      <classpath>            
+        <pathelement location="${servletsjar}" />
+        <pathelement location="${oraclejar}" />
+        <pathelement location="${uploadbeanjar}" />       
+        <pathelement location="${sources}" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="build">
+     <echo message="------ Creating JAR Archive"/>
+    <jar jarfile="${dist}/oraclelobdbstore.jar" basedir="${classes}" />
+  </target> 
+
+  <target name="all" depends="dist">
+     <echo message="------ Running JavaDoc"/>
+     <javadoc packagenames="sample.*"
+              sourcepath="${sources}"
+              destdir="${api}"
+              bottom="Copyright &#169; 1999-2005 JavaZOOM.">
+      <classpath>
+        <pathelement location="${servletsjar}"/>
+        <pathelement location="${oraclejar}"/>        
+        <pathelement location="${uploadbeanjar}"/>
+      </classpath>
+     </javadoc>
+  </target>
+
+
+  <target name="usage">
+    <echo message="----------------------------------------------------------------"/>  
+    <echo message="----------          OracleLobDBStore BUILD           ----------"/>
+    <echo message=""/>
+    <echo message="Usage : "/>
+    <echo message="        ant build       : Compilation"/>
+    <echo message="        ant dist        : Compilation + JAR"/>    
+    <echo message="        ant all         : Compilation + JAR + JavaDoc"/>
+    <echo message=""/>
+    <echo message="----------------------------------------------------------------"/>  
+  </target>
+
+</project>

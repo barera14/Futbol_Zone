@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="bd_futbolzone"/>
+  <table-filter match-name="jugadores"/>
+  <table-filter match-name="partido"/>
+  <table-filter match-name="s_administrador"/>
+  <table-filter match-name="establecimiento"/>
+  <table-filter match-name="alquiler"/>
+  <table-filter match-name="cancha"/>
+  <table-filter match-name="campeonatos"/>
+  <table-filter match-name="equipo"/>
+  <table-filter match-name="usuarios"/>
+  <table-filter match-name="cliente"/>
+</hibernate-reverse-engineering>

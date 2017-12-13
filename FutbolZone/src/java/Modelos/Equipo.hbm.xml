@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Equipo" table="equipo" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idEquipo" type="java.lang.Integer">
+            <column name="idEquipo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="campeonatos" class="Modelos.Campeonatos" fetch="select">
+            <column name="Campeonatos" />
+        </many-to-one>
+        <many-to-one name="cliente" class="Modelos.Cliente" fetch="select">
+            <column name="Cliente" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" not-null="true" />
+        </property>
+        <property name="clasificacion" type="java.lang.Integer">
+            <column name="Clasificacion" />
+        </property>
+        <property name="golesFavor" type="java.lang.Integer">
+            <column name="Goles_Favor" />
+        </property>
+        <property name="golesContra" type="java.lang.Integer">
+            <column name="Goles_Contra" />
+        </property>
+        <property name="puntos" type="java.lang.Integer">
+            <column name="Puntos" />
+        </property>
+        <property name="pganados" type="java.lang.Integer">
+            <column name="PGanados" />
+        </property>
+        <property name="pperdidos" type="java.lang.Integer">
+            <column name="PPerdidos" />
+        </property>
+        <set name="jugadoreses" table="jugadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Equipo" />
+            </key>
+            <one-to-many class="Modelos.Jugadores" />
+        </set>
+        <set name="partidosForLocal" table="partido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Local" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Partido" />
+        </set>
+        <set name="jugadoreses_1" table="jugadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Equipo" />
+            </key>
+            <one-to-many class="Modelos.Jugadores" />
+        </set>
+        <set name="partidosForVisitante" table="partido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Visitante" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Partido" />
+        </set>
+    </class>
+</hibernate-mapping>

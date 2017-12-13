@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Usuarios" table="usuarios" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idUsuarios" type="java.lang.Integer">
+            <column name="idUsuarios" />
+            <generator class="identity" />
+        </id>
+        <property name="correo" type="string">
+            <column name="correo" length="45" not-null="true" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="65535" not-null="true" />
+        </property>
+        <property name="perfil" type="string">
+            <column name="Perfil" length="15" not-null="true" />
+        </property>
+        <set name="establecimientos" table="establecimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Establecimiento" />
+        </set>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Cliente" />
+        </set>
+        <set name="SAdministradors" table="s_administrador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.SAdministrador" />
+        </set>
+    </class>
+</hibernate-mapping>

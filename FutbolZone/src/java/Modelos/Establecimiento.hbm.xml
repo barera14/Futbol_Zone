@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Establecimiento" table="establecimiento" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idEstablecimiento" type="java.lang.Integer">
+            <column name="idEstablecimiento" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="Modelos.Usuarios" fetch="select">
+            <column name="Usuario" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" not-null="true" />
+        </property>
+        <property name="nit" type="string">
+            <column name="Nit" length="45" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="45" not-null="true" />
+        </property>
+        <property name="celular" type="long">
+            <column name="Celular" not-null="true" />
+        </property>
+        <property name="foto" type="string">
+            <column name="Foto" length="45" not-null="true" />
+        </property>
+        <property name="calificacion" type="int">
+            <column name="Calificacion" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="8" not-null="true" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="Municipio" length="45" not-null="true" />
+        </property>
+        <set name="campeonatoses" table="campeonatos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Establecimiento" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Campeonatos" />
+        </set>
+        <set name="canchas" table="cancha" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Establecimiento" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Cancha" />
+        </set>
+    </class>
+</hibernate-mapping>

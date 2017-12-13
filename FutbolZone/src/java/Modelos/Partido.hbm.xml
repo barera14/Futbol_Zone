@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Partido" table="partido" catalog="bd_futbolzone" optimistic-lock="version">
+        <id name="idPartido" type="java.lang.Integer">
+            <column name="idPartido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="campeonatos" class="Modelos.Campeonatos" fetch="select">
+            <column name="Campeonatos" not-null="true" />
+        </many-to-one>
+        <many-to-one name="equipoByLocal" class="Modelos.Equipo" fetch="select">
+            <column name="Local" not-null="true" />
+        </many-to-one>
+        <many-to-one name="equipoByVisitante" class="Modelos.Equipo" fetch="select">
+            <column name="Visitante" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="Fecha" length="19" />
+        </property>
+        <property name="golvis" type="java.lang.Integer">
+            <column name="Golvis" />
+        </property>
+        <property name="golLoC" type="java.lang.Integer">
+            <column name="GolLoC" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
